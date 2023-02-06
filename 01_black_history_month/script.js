@@ -26,6 +26,12 @@ const ChatMessage = {
       default: true
     },
 
+    messageDelay: {
+      // how long before the next message
+      type: Number,
+      default: 2000
+    },
+
     fontSize: {
       type: Number,
       default: 14 },
@@ -653,6 +659,8 @@ const ChatThread = new Vue({
       await Vue.nextTick();
       const messages = this.$refs.chatMessages;
       const lastMessage = messages[messages.length - 1];
+      const currentMessage = messages[messages.length];
+      const nextMessage = this.queue[1];
       // TODO: Draw the message trail.
 
       if (document.body !== null) {
@@ -664,6 +672,8 @@ const ChatThread = new Vue({
     this.interval = setInterval(() => {
       this.messages.push(this.queue.shift());
     }, 2000);
-  } });
+  }
+}
+);
 
 document.scrollingElement.scroll(0, 1);

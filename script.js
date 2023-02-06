@@ -1,4 +1,3 @@
-
 const ChatMessage = {
   template: '#chat-message',
   props: {
@@ -8,22 +7,27 @@ const ChatMessage = {
     },
 
     remote: {
-      // Does the message originate
-      // from a remote source?
+      // Comment by Nutty7t:
+      // Does the message originate from a remote source?
       type: Boolean,
       default: false
     },
 
     chatter: {
-      // Used to lookup image
+      // Used to grab chat image
       type: String
     },
 
     newChatter: {
-      // Does the message originate
-      // from a remote source?
+      // TODO: Hide picture if same chatter sends multiple messages in a row
       type: Boolean,
       default: true
+    },
+
+    messageWait: {
+      // How long before the next message
+      type: Number,
+      default: 2000 // in ms
     },
 
     fontSize: {
@@ -44,6 +48,7 @@ const ChatMessage = {
     
   },
   computed: {
+    // Comment by Nutty7t:
     // ------------------------------------------
     //         Message Box (remote: true)
     // ------------------------------------------
@@ -76,6 +81,7 @@ const ChatMessage = {
     },
     textOffset() {
       return {
+        // Comment by Nutty7t:
         // Left padding.
         x: 15,
         // Adjust for top/bottom padding.
@@ -187,9 +193,11 @@ const ChatMessage = {
       map(p => `${p.x},${p.y}`).join(' ');
     },
     containerHeight() {
+      // Comment by Nutty7t:
       // Compute how much vertical space the message text takes up by
       // multiplying the line height by the number of lines in the message.
       let height = this.fontSize * this.lineHeight * this.wrappedMessage.length;
+      // Comment by Nutty7t:
       // Now, we need to add some extra bottom padding otherwise the
       // descenders (the part of the characters beneath the baseline)
       // will get clipped. I don't know the exact height of the descender,
@@ -211,6 +219,7 @@ const ChatMessage = {
       return height + this.fontSize * this.lineHeight;
     },
     viewBoxHeight() {
+      // Comment by Nutty7t:
       //
       //   ---
       //    |   border width
@@ -232,6 +241,7 @@ const ChatMessage = {
   asyncComputed: {
     wrappedMessage: {
       async get() {
+        // Comment by Nutty7t:
         // Kind of a hacky way of implementing word wrapping
         // on SVG <text> elements. Not quite sure how to go
         // about determining the bounding box of some text,
@@ -294,348 +304,31 @@ const ChatThread = new Vue({
     return {
       messages: [],
       queue: [
+    //format
+    //  text: what is sent  [nutty7t]
+    //  chatter: who sent it [cerebralpolicy]
+    //  remote: is it someone other than POV [nutty7t]
+    //  messageWait: how long before next reply [cerebralpolicy]
       {
-        text: "Valentine's Day is coming up... do any of you have any plans?",
+        text: "Message 1",
         chatter: 'Haru',
-        remote: true
+        remote: true,
+        messageWait: 1000
       },
 
       {
-        text: 'I wonder...',
+        text: 'Message 2',
         chatter: 'Ryuji',
-        remote: true },
+        remote: true, 
+        messageWait: 2000
+      },
 
       {
-        text: "If Ann finally kills you I'll make sure to let her off the hook.",
+        text: "Message 3",
         chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "That ain't funny.",
-        chatter: 'Ryuji',
-        remote: true },
-
-      {
-        text: "Technically true... it is instead hilarious.",
-        chatter: 'Hifumi',
-        remote: true },
-
-      {
-        text: "I wouldn't kill Ryuji.",
-        chatter: 'Ann',
-        remote: true },
-
-      {
-        text: "Not even if he broke into your house at 02:00 instead of calling you like a normal person?",
-        chatter: 'Hifumi',
-        remote: true },
-
-      {
-        text: "Ren?",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "Uh... old habits die hard? I said sorry, can you stop bringing that stuff up in the group chat?",
-        chatter: 'Ren',
-        remote: false },
-
-      {
-        text: "Die Hard With Hifu-gence. Gottem!",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "Okay... maybe I would kill Ryuji in that case.",
-        chatter: 'Ann',
-        remote: true },
-
-      {
-        text: "The fuck did I do?",
-        chatter: 'Ryuji',
-        remote: true },
-
-      {
-        text: "Ann has told me plenty.",
-        chatter: 'Hifumi',
-        remote: true },
-
-      {
-        text: "Still. I... may have ordered cake.",
-        chatter: 'Ann',
-        remote: true },
-
-      {
-        text: "So that's a no... I ain't getting shit.",
-        chatter: 'Ryuji',
-        remote: true },
-
-      {
-        text: "You should be used to that by now.",
-        chatter: 'Ren',
-        remote: false },
-
-      {
-        text: "Fuck off.",
-        chatter: 'Ryuji',
-        remote: true },
-
-      {
-        text: "No.",
-        chatter: 'Ren',
-        remote: false },
-
-      {
-        text: "You're gonna be alone forever Ryuji...",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "Hey, don't bully him. It's not his fault.",
-        chatter: 'Ann',
-        remote: true },
-
-      {
-        text: "Yeah that's a bit dark.",
-        chatter: 'Haru',
-        remote: true },
-
-      {
-        text: "im goin 2 go vist my belovd doorboi",
-        chatter: 'Lavensa',
-        remote: true },
-
-      {
-        text: "What...",
-        chatter: 'Ann',
-        remote: true },
-
-      {
-        text: "Since when was there a small child here?",
-        chatter: 'Hifumi',
-        remote: true },
-
-      {
-        text: "Wait... we never removed Lavensa-chan, did we?",
-        chatter: 'Haru',
-        remote: true },
-
-      {
-        text: "Nope.",
-        chatter: 'Ren',
-        remote: false },
-
-      {
-        text: "Sorry, my sister took my phone away for a moment :(",
-        chatter: 'Lavensa',
-        remote: true },
-
-      {
-        text: "I can relate, Lavensa-chan.",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "The cougar or the airhead who's obsessed with that dead kid?",
-        chatter: 'Ryuji',
-        remote: true },
-
-      {
-        text: "RYUJI!",
-        chatter: 'Ann',
-        remote: true },
-
-      {
-        text: "Elizabeth... now Margaret is scolding her.",
-        chatter: 'Lavensa',
-        remote: true },
-
-      {
-        text: "Does it happen often?",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "My sister in Christ, you're Japanese. Asian. You're not white.",
-        chatter: 'Hifumi',
-        remote: true },
-
-      {
-        text: "Shut it, Admiral Bimboki Tojo.",
-        chatter: 'Sumire',
-        newChatter: false,
-        remote: true },
-
-      {
-        text: "Who's that?",
-        chatter: 'Yuskue',
-        remote: true },
-
-      {
-        text: "Go eat some dogs.",
-        chatter: 'Sumire',
-        newChatter: false,
-        remote: true },
-
-      {
-        text: "FFS now she's being racist towards her own people!",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "What the hell is happening?",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "Sumire.",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "Just typical Sumire shit.",
-        chatter: 'Ryuji',
-        remote: true },
-
-      {
-        text: "She's going on another racist tirade.",
-        chatter: 'Ren',
-        remote: false },
-
-      {
-        text: "Go back to your rice fields you chunni bitch!",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "So she's being a cunt again?",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "That's a little mean.",
-        chatter: 'Haru',
-        remote: true },
-
-      {
-        text: "Oh, are you feelings hurt, princess?",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "Calling you names is not a nice thing to do, I am just helping.",
-        chatter: 'Haru',
-        remote: true },
-
-      {
-        text: "Haru, it isn't worth it.",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "You know what?",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "I'm glad Akechi-kun killed your dad, you coal digger.",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "WHAT IS WRONG WITH YOU?",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "Holy shit, this is amazing.",
-        chatter: 'Hifumi',
-        remote: true },
-
-      {
-        text: "Sometimes you scare me, Hifumi.",
-        chatter: 'Ren',
-        remote: false },
-
-      {
-        text: "We should've dropped more atomic bombs on the Japs.",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "Bitch, you ARE Japanese. Getting that scholarship to Stanford doesn't make you American!",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "No. Let her keep digging a hole. It is quite entertaining.",
-        chatter: 'Hifumi',
-        remote: true },
-
-      {
-        text: "Listen here, slut. The only reason you're even here to bear witness to my grandure is because you let MY SENPAI enter your hole.",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "Do you have CTE?",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "Wait... is that true?",
-        chatter: 'Ryuji',
-        remote: true },
-
-      {
-        text: "No! Hifumi's like... Catholic or something. We haven't done that.",
-        chatter: 'Ren',
-        remote: false },
-
-      {
-        text: "I mean, I'm not religious but I have little interest in premarital sex.",
-        chatter: 'Hifumi',
-        remote: true },
-
-      {
-        text: "Femcel.",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "Sumire, this is why we didn't take you on that trip.",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "You aren't even a good cop, you haven't shot any black people.",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "And....",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "Sumire has been timed out for a week. Imma go back to sleep.",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "THANK YOU!",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "Well... that was...",
-        chatter: 'Ann',
-        remote: true },
-
-      {
-        text: "Has anyone had lobsters lately?",
-        chatter: 'Yuskue',
-        remote: true },
+        remote: true,
+        messageWait: 1500
+      },
 
       ],
 
@@ -651,7 +344,10 @@ const ChatThread = new Vue({
       await Vue.nextTick();
       const messages = this.$refs.chatMessages;
       const lastMessage = messages[messages.length - 1];
-      // TODO: Draw the message trail.
+      // possible mechanisms?      
+//    const thisMessage = messages[messages.length];
+//    var delayMessage = thisMessage.messageWait;
+      // display indicator someone is typing
 
       if (document.body !== null) {
         TweenMax.to(window, 1, { scrollTo: { y: document.body.scrollHeight }, ease: Power3.easeOut });
@@ -661,7 +357,8 @@ const ChatThread = new Vue({
   mounted() {
     this.interval = setInterval(() => {
       this.messages.push(this.queue.shift());
-    }, 2000);
-  } });
+    }, 2000); // Need to pass messageWait value here
+  } 
+});
 
 document.scrollingElement.scroll(0, 1);
