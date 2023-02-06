@@ -1,0 +1,16 @@
+<NotepadPlus>
+    <Project name="BlackHistoryMonth">
+        <Folder name="fonts">
+            <File name="fonts\OptimaNovaLT-Black.eot" />
+            <File name="fonts\OptimaNovaLT-Black.svg" />
+            <File name="fonts\OptimaNovaLT-Black.ttf" />
+            <File name="fonts\OptimaNovaLT-Black.woff" />
+            <File name="fonts\OptimaNovaLT-Black.woff2" />
+            <Folder name="eot" />
+            <Folder name="Folder Name" />
+        </Folder>
+        <File name="index.html" />
+        <File name="script.js" />
+        <File name="style.css" />
+    </Project>
+</NotepadPlus>
