@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
 @font-face {
   font-family: "Optima Nova";
-  src: url('fonts/eot/OptimaNovaLT-Black.eot');
-  src: url('fonts/eot/OptimaNovaLT-Black.eot') format('embedded-opentype'),
-       url('fonts/woff2/OptimaNovaLT-Black.woff2') format('woff2'),
-       url('fonts/woff/OptimaNovaLT-Black.woff') format('woff'),
-       url('fonts/ttf/OptimaNovaLT-Black.ttf') format('truetype');
+  src: url('../fonts/eot/OptimaNovaLT-Black.eot');
+  src: url('../fonts/eot/OptimaNovaLT-Black.eot') format('embedded-opentype'),
+       url('../fonts/woff2/OptimaNovaLT-Black.woff2') format('woff2'),
+       url('../fonts/woff/OptimaNovaLT-Black.woff') format('woff'),
+       url('../fonts/ttf/OptimaNovaLT-Black.ttf') format('truetype');
 }
 
 #chatBody * {
