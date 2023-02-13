@@ -671,7 +671,7 @@ const ChatThread = new Vue({
   mounted() {
     this.interval = setInterval(() => {
       this.messages.push(this.queue.shift());
-    }, 2000);
+    }, this.lastMessage.messageWait);
   }
 }
 );

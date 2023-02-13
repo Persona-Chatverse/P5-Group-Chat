@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+@font-face {
+  font-family: "Optima Nova";
+  src: url('../fonts/eot/OptimaNovaLT-Black.eot');
+  src: url('../fonts/eot/OptimaNovaLT-Black.eot') format('embedded-opentype'),
+       url('../fonts/woff2/OptimaNovaLT-Black.woff2') format('woff2'),
+       url('../fonts/woff/OptimaNovaLT-Black.woff') format('woff'),
+       url('../fonts/ttf/OptimaNovaLT-Black.ttf') format('truetype');
+}
+
+#chatBody * {
+  overflow-anchor: none;
+}
+
+#anchor {
+  overflow-anchor: auto;
+  height: 10px;
+}
+
+html {
+  background: #cc0000;
+  font-family: "Optima Nova","Source Sans Pro", sans-serif;
+  font-weight: 700;
+}
+
+body {
+  max-width: 600px;
+  margin: auto;
+  height: 100.001vh;
+}
+
+.flipX {
+  transform: scaleX(-1);
+  transform-origin: center;
+}
