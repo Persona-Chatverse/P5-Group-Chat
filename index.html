@@ -1,214 +1,58 @@
-<!DOCTYPE html>
-<html lang="en" >
+<!doctype html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Persona SMS Simulation</title>
+  <title>Groupchatverse</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
-<div id="chatBody">
-	<!-- partial:index.partial.html -->
-	<img src="images/scrolling.png">
-	<div id="Credit">Orignal project by <a href="#">nutty7t</a>.<br>Edited by CerebralPolicy (u/harperofthefreenorth)</div>
-	<div id="chat">
-	<!--insert new-->
- 	</div>
-	<script id="chat-thread" type="x-template">
-		<div v-if="window.devicePixelRatio === 1">
-			<br/>
-			<ChatMessage
-				v-for="message in messages"
-				ref="chatMessages"
-				:message="message.text"
-				:remote="message.remote"
-				:chatter="message.chatter"
-				:consecutive="message.consecutive"
-		/>
+  <header>
+	<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #cc0000; font-family: 'Optima Nova','Source Sans Pro', sans-serif; color:black">
+		<a class="navbar-brand" href="index.html" style="font-family: 'Optima Nova','Source Sans Pro', sans-serif; color:black">Persona 5 Chatverse</a>
+		<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+			aria-expanded="false" aria-label="Toggle navigation"></button>
+		<div class="collapse navbar-collapse" id="collapsibleNavId">
+			<ul class="navbar-nav me-auto mt-2 mt-lg-0">
+				<li class="nav-item">
+					<a class="nav-link active" href="index.html" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chats</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownId">
+						<a class="dropdown-item" href="01_black_history_month/01_black_history_month.html">Chat 1: Black History Month</a>
+						<a class="dropdown-item" href="02_valentines/02_valentines.html">Chat 2: Valentine's Day</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link " href="00_new_system/index.html" aria-current="page">Resources</a>
+				</li>
+			</ul>
 		</div>
-		<div v-else style="margin: 20px; color: white">
-			<h1>Oops, my bad...</h1>
-			<p>
-				Your <code>window.devicePixelRatio</code> does not equal <code>1</code>. This means that the ratio between physical pixels and logical pixels don't have a 1-to-1 correspondence on your display device. I have yet to (and probably never will) implement pixel scaling for these ratios. If you're on a mobile device, try viewing this on a desktop computer; but not on a Retina or HiDPI display.
-			</p>
-			<p>- ナッティ (nutty7t)</p>
-		</div>
-	</script>
+	</nav>
+  </header>
+  <main>
 
-	<script id="chat-message" type="x-template">
-		<svg xmlns="http://www.w3.org/2000/svg" :viewBox="`0 0 500 ${viewBoxHeight}`" :style="style">
-			<!--
-				HACK: This invisible <text> element is used to figure out
-				the bounding box of a line of text without it being painted.
-			-->
-			<text
-				ref="hackText"
-				visibility="hidden"
-				:style="{ fontSize: fontSize + 'px' }">{{ hackText }}</text>
+  </main>
+  <footer>
+	<!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+	integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
 
-			<!-- Buddy Avatar -->
-		<a v-if="newChatter">
-			<polygon
-				v-if="remote"
-				points="-10,-5 62,5 70,55 5,63"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				style="fill: black"/>
-
-			<polygon
-				v-if="remote"
-				points="0,0 60,10 70,50 10,60"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				style="fill: white"/>
-
-			<clipPath id="avatarClipPath">
-			<polygon points="2,-10 62,-10 100,42 10,58"/>
-			</clipPath>
-
-		<!-- absolute dogshit workaround -->
-			<image
-				clip-path="url(#avatarClipPath)"
-				v-if="chatter == 'Akechi'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Akechi.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-			<image
-				clip-path="url(#avatarClipPath)"
-				v-else-if="chatter == 'Ann'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Ann.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-			<image
-				clip-path="url(#avatarClipPath)"
-				v-else-if="chatter == 'Futaba'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Futaba.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-		<image
-				clip-path="url(#avatarClipPath)"
-				v-else-if="chatter == 'Haru'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Haru.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-			<image
-				clip-path="url(#avatarClipPath)"
-				v-else-if="chatter == 'Hifumi'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Hifumi.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-			<image
-				clip-path="url(#avatarClipPath)"
-				v-else-if="chatter == 'Kasumi'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Kasumi.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-			<image
-				clip-path="url(#avatarClipPath)"
-				v-else-if="chatter == 'Makoto'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Thing.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-			<image
-				clip-path="url(#avatarClipPath)"
-				v-else-if="chatter == 'Ryuji'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Ryuji.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-			<image
-				clip-path="url(#avatarClipPath)"
-				v-else-if="chatter == 'Sumire'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Sumire.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-			<image
-				clip-path="url(#avatarClipPath)"
-				v-else-if="chatter == 'Yuskue'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Yuskue.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-			<image
-				clip-path="url(#avatarClipPath)"
-				v-else-if="chatter == 'Lavensa'"
-				x="-10"
-				y="-10"
-				xlink:href="images\Lavensa.png"
-				:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
-				width="80px"
-		/>
-		</a>
-
-			<!-- Message Text Container Border -->
-			<polygon
-				:points="containerBorderPoints"
-				:style="{ fill: primaryColor }"
-				:class="{ flipX: !remote }"/>
-
-			<!-- Message Text Container Tail Border -->
-			<polygon
-				:points="containerTailBorderPoints"
-				:style="{ fill: primaryColor }"
-				:class="{ flipX: !remote }"/>
-
-			<!-- Message Text Container Tail -->
-			<polygon
-				:points="containerTailPoints"
-				:style="{ fill: secondaryColor }"
-				:class="{ flipX: !remote }"/>
-
-			<!-- Message Text Container -->
-			<polygon
-				:points="containerPoints"
-				:style="{ fill: secondaryColor }"
-				:class="{ flipX: !remote }"/>
-
-			<!-- Message Text -->
-			<text :y="textOffset.y" :style="{ fontSize: fontSize + 'px' }">
-				<tspan
-					v-for="line of wrappedMessage"
-					:x="remote ? messageBox.origin.x + textOffset.x : 500 - messageBox.origin.x - messageBox.centerWidth"
-					:dy="`${lineHeight}em`"
-					:style="{ fill: primaryColor }">
-					{{ line.text }}
-				</tspan>
-			</text>
-		</svg>
-	</script>
-	<!-- partial -->
- <div id="anchor"></div>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
-<script src='https://unpkg.com/vue-async-computed@3.7.0'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js'></script>
-<script src='//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js'></script><script  src="./script.js"></script>
-</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+	integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
 </body>
+
 </html>
