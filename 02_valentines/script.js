@@ -1,3 +1,21 @@
+// from Raffy Banks https://jsfiddle.net/raffybanks/706dc94p/
+// Returns characters typed per minute in milliseconds
+function chpmToMilliseconds(chpm) {
+  return (Math.random() * (1000 / (chpm / 60)));
+}
+
+// Returns words typed per minute in milliseconds
+function wpmToMilliseconds(string, wpm) {
+  return ((string.split(' ').length / (wpm / 60)) * 1000);
+}
+
+const userWPM = [
+  //USER INDEX
+  ['Akechi',  'Ann',  'Caroline', 'Chihaya', 'Futaba',  'Haru', 'Iwai', 'Justine',  'Kawakami', 'Lavensa', 'Makoto', 'Ryuji',  'Sumire',  'Tae',  'Yoshida',  'Yoskue']
+  //WPM
+  [1       ,   2]
+];
+
 
 const ChatMessage = {
   template: '#chat-message',
@@ -24,6 +42,10 @@ const ChatMessage = {
       // from a remote source?
       type: Boolean,
       default: true
+    },
+
+    nextResponse: {
+      type: Number
     },
 
     fontSize: {
@@ -63,7 +85,7 @@ const ChatMessage = {
           x: this.remote ? 130 : 60,
           y: 20 },
 
-        centerWidth: 300,
+        centerWidth: 310,
         leftWidth: 10,
         rightWidth: 20,
         slantHeight: 5,
@@ -77,7 +99,7 @@ const ChatMessage = {
     textOffset() {
       return {
         // Left padding.
-        x: 15,
+        x: 10,
         // Adjust for top/bottom padding.
         y: this.messageBox.origin.y + this.fontSize * this.lineHeight / 4 };
 
@@ -303,7 +325,8 @@ const ChatThread = new Vue({
       {
         text: 'I wonder...',
         chatter: 'Ryuji',
-        remote: true },
+        remote: true 
+      },
 
       {
         text: "If Ann finally kills you I'll make sure to let her off the hook.",
@@ -386,12 +409,12 @@ const ChatThread = new Vue({
         remote: false },
 
       {
-        text: "You're gonna be alone forever Ryuji...",
+        text: "You're gonna be alone again Ryuji...",
         chatter: 'Futaba',
         remote: true },
 
       {
-        text: "Hey, don't bully him. It's not his fault.",
+        text: "Hey, don't bully him. It's not his fault he's passive.",
         chatter: 'Ann',
         remote: true },
 
@@ -456,202 +479,381 @@ const ChatThread = new Vue({
         remote: true },
 
       {
-        text: "My sister in Christ, you're Japanese. Asian. You're not white.",
+        text: "Ren.",
         chatter: 'Hifumi',
-        remote: true },
+        remote: true
+      },
 
       {
-        text: "Shut it, Admiral Bimboki Tojo.",
-        chatter: 'Sumire',
+        text: "I swear to Mary Mother of God, if you're some pervert I'll flay you alive.",
+        chatter: 'Hifumi',
         newChatter: false,
-        remote: true },
+        remote: true
+      },
 
       {
-        text: "Who's that?",
+        text: "No... why would you even think that?",
+        chatter: 'Ren',
+        remote: false 
+      },
+
+      {
+        text: "Do you mean filet?",
+        chatter: 'Yuskue',
+        remote: true 
+      },
+
+      {
+        text: "FFS Yuskue.",
+        chatter: 'Makoto',
+        remote: true 
+      },
+
+      {
+        text: "He's high again... and where is he?",
+        chatter: 'Haru',
+        remote: true 
+      },
+
+      {
+        text: "I was just making sure, that's all.",
+        chatter: 'Hifumi',
+        remote: true 
+      },
+
+      {
+        text: "All the signs are in French.",
         chatter: 'Yuskue',
         remote: true },
 
       {
-        text: "Go eat some dogs.",
-        chatter: 'Sumire',
-        newChatter: false,
-        remote: true },
-
-      {
-        text: "FFS now she's being racist towards her own people!",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "What the hell is happening?",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "Sumire.",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "Just typical Sumire shit.",
-        chatter: 'Ryuji',
-        remote: true },
-
-      {
-        text: "She's going on another racist tirade.",
+        text: "Are you still doing that gallery tour in Canada?",
         chatter: 'Ren',
         remote: false },
 
       {
-        text: "Go back to your rice fields you chunni bitch!",
-        chatter: 'Sumire',
-        remote: true },
+        text: "I must be in France.",
+        chatter: 'Yuskue',
+        remote: true 
+      },
 
       {
-        text: "So she's being a cunt again?",
+        text: "Sounds like you're in Quebec.",
+        chatter: 'Makoto',
+        remote: true 
+      },
+
+      {
+        text: "Oh! Some of my favourite games were developed there.",
         chatter: 'Futaba',
-        remote: true },
+        remote: true 
+      },
 
       {
-        text: "That's a little mean.",
+        text: "Unfortunately it does, Makoto... Elizabeth has deficient impulse control and a short attention span. Igor only has one attendant when the Velvet Room is in use, but since it isn't the four of us are just loitering.",
+        chatter: 'Lavensa',
+        remote: true 
+      },
+
+      {
+        text: "Velvet Room? Igor? What is this?",
+        chatter: 'Hifumi',
+        remote: true 
+      },
+
+      {
+        text: "Phantom Thieves things, Hifumi.",
+        chatter: 'Ren',
+        remote: false 
+      },
+
+      {
+        text: "My apologies I do not believe I have met you before, Miss Togo. I am Lavensa, I was Ren's attendant during his time in the Velvet Room. Who are you?",
+        chatter: 'Lavensa',
+        remote: true 
+      },
+
+      {
+        text: "Technically she was two of my attendants.",
+        chatter: 'Ren',
+        remote: false 
+      },
+
+      {
+        text: "That doesn't make sense.",
+        chatter: 'Hifumi',
+        remote: true 
+      },
+
+      {
+        text: "My soul was split in twain.",
+        chatter: 'Lavensa',
+        remote: true 
+      },
+
+      {
+        text: "Hold on there... your soul?",
+        chatter: 'Hifumi',
+        remote: true 
+      },
+
+      {
+        text: "It's a long story.",
+        chatter: 'Ren',
+        remote: false 
+      },
+
+      {
+        text: "Miss Togo, if it isn't too much of an intrusion, may I ask how you came to know Ren and the others?",
+        chatter: 'Lavensa',
+        remote: true 
+      },
+
+      {
+        text: "Well, Yuskue went to my school... and Ren kept hitting on me in Church.",
+        chatter: 'Hifumi',
+        remote: true 
+      },
+
+      {
+        text: "That's terrible!",
         chatter: 'Haru',
-        remote: true },
+        remote: true 
+      },
 
       {
-        text: "Oh, are you feelings hurt, princess?",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "Calling you names is not a nice thing to do, I am just helping.",
-        chatter: 'Haru',
-        remote: true },
-
-      {
-        text: "Haru, it isn't worth it.",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "You know what?",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "I'm glad Akechi-kun killed your dad, you coal digger.",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "WHAT IS WRONG WITH YOU?",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "Holy shit, this is amazing.",
-        chatter: 'Hifumi',
-        remote: true },
-
-      {
-        text: "Sometimes you scare me, Hifumi.",
+        text: "Don't listen to her, she's lying.",
         chatter: 'Ren',
-        remote: false },
+        remote: false 
+      },
 
       {
-        text: "We should've dropped more atomic bombs on the Japs.",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "Bitch, you ARE Japanese. Getting that scholarship to Stanford doesn't make you American!",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "No. Let her keep digging a hole. It is quite entertaining.",
+        text: "Oh really? I admit I may be slightly exaggerating, but it was still hallowed ground we sullied with the flames of passion.",
         chatter: 'Hifumi',
-        remote: true },
+        remote: true 
+      },
 
       {
-        text: "Listen here, slut. The only reason you're even here to bear witness to my grandure is because you let MY SENPAI enter your hole.",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "Do you have CTE?",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "Wait... is that true?",
-        chatter: 'Ryuji',
-        remote: true },
-
-      {
-        text: "No! Hifumi's like... Catholic or something. We haven't done that.",
+        text: "Hifumi, please think of Lavensa as a naive child who's still impressionable.",
         chatter: 'Ren',
-        remote: false },
+        remote: false 
+      },
 
       {
-        text: "I mean, I'm not religious but I have little interest in premarital sex.",
+        text: "Fine, fine. I'm just his future wife.",
         chatter: 'Hifumi',
-        remote: true },
+        remote: true 
+      },
 
       {
-        text: "Femcel.",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "Sumire, this is why we didn't take you on that trip.",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "You aren't even a good cop, you haven't shot any black people.",
-        chatter: 'Sumire',
-        remote: true },
-
-      {
-        text: "And....",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "Sumire has been timed out for a week. Imma go back to sleep.",
-        chatter: 'Futaba',
-        remote: true },
-
-      {
-        text: "THANK YOU!",
-        chatter: 'Makoto',
-        remote: true },
-
-      {
-        text: "Well... that was...",
+        text: "Just say girlfriend like a normal person.",
         chatter: 'Ann',
-        remote: true },
+        remote: true 
+      },
 
       {
-        text: "Has anyone had lobsters lately?",
+        text: "You'll confuse Lavensa.",
+        chatter: 'Makoto',
+        remote: true 
+      },
+
+      {
+        text: "Future widow it is then.",
+        chatter: 'Hifumi',
+        remote: true 
+      },
+
+      {
+        text: "No!",
+        chatter: 'Ren',
+        remote: false 
+      },
+
+      {
+        text: "So you intend to marry this woman? Intriguing, I do not believe a Wildcard has ever gotten married before.",
+        chatter: 'Lavensa',
+        remote: true 
+      },
+
+      {
+        text: "She's saying Ren's ultra-rare loot.",
+        chatter: 'Futaba',
+        remote: true 
+      },
+
+      {
+        text: "DON'T GAMIFY MY RELATIONSHIP!",
+        chatter: 'Ren',
+        remote: false 
+      },
+
+      {
+        text: "That happened long ago, darling.",
+        chatter: 'Hifumi',
+        remote: true 
+      },
+
+      {
+        text: "Yeah, you knew what you were signing up for.",
+        chatter: 'Makoto',
+        remote: true 
+      },
+
+      {
+        text: "How many other wildcards are there Lavensa-chan?",
+        chatter: 'Haru',
+        remote: true 
+      },
+
+      {
+        text: "Two that my siblings know of.",
+        chatter: 'Lavensa',
+        remote: true
+      },
+
+      {
+        text: "So Ren ain't the only one.",
+        chatter: 'Ryuji',
+        remote: true
+      },
+
+      {
+        text: "There was Makoto... the dead one. Elizabeth talks about him every day - that's why Theodore likes to wander off outside the Velvet Room. I would too if Margaret let me outside... oh I should ask her about the second one. That boy was her ward.",
+        chatter: 'Lavensa',
+        remote: true
+      },
+
+      {
+        text: "Rest in peace Ms. Niijima.",
+        chatter: 'Hifumi',
+        remote: true
+      },
+
+      {
+        text: "Sae will not rest until my killer is found. She's going to hunt down this 'Natural Causes' guy if it's the last thing she does.",
+        chatter: 'Makoto',
+        remote: true
+      },
+
+      {
+        text: "Shut up.",
+        chatter: 'Ren',
+        remote: false
+      },
+
+      {
+        text: "Okay, I have returned. Here's what Margaret just told me:",
+        chatter: 'Lavensa',
+        remote: true
+      },
+
+      {
+        text: "Yu Narukami is a two-faced manwhore. Ninety percent of Rise Kujikawa's songs since she redebuted have been about how much of an asshole that little shit was.",
+        chatter: 'Lavensa',
+        newChatter: false,
+        remote: true
+      },
+
+      {
+        text: "Rise? As in Risette the idol?",
+        chatter: 'Ann',
+        newChatter: true,
+        remote: true
+      },
+
+      {
+        text: "Yes, apparently he met a student teacher named Kotone Shiomi in his final year of High School and they got married. Oddly enough their child shares the name 'Nanako' with Yu's cousin.",
+        chatter: 'Lavensa',
+        newChatter: true,
+        remote: true
+      },
+
+      {
+        text: "...",
+        chatter: 'Makoto',
+        newChatter: true,
+        remote: true
+      },
+
+      {
+        text: "What the fuck?",
+        chatter: 'Ryuji',
+        newChatter: true,
+        remote: true
+      },
+
+      {
+        text: "Disgusting.",
+        chatter: 'Ann',
+        newChatter: true,
+        remote: true
+      },
+
+      {
+        text: "I cannot unread that.",
+        chatter: 'Ren',
+        newChatter: true,
+        remote: false
+      },
+
+      {
+        text: "Back on topic, Ren and I were just going to hang out in my pool. Ann, Ryuji, why don't you guys swing over and we can make it a double date?",
+        chatter: 'Hifumi',
+        newChatter: true,
+        remote: true
+      },
+
+      {
+        text: "Sounds great!",
+        chatter: 'Ann',
+        newChatter: true,
+        remote: true
+      },
+
+      {
+        text: "Ann, can we at least discuss it?",
+        chatter: 'Ryuji',
+        newChatter: true,
+        remote: true
+      },
+
+      {
+        text: "It doesn't work that way once Hifumi's mind is set.",
+        chatter: 'Ren',
+        newChatter: true,
+        remote: false
+      },
+
+      {
+        text: "YOU WHORE!",
+        chatter: 'Sumire',
+        newChatter: true,
+        remote: true
+      },
+    ],
+    isTyping: [
+      {
+        text: "...",
         chatter: 'Yuskue',
-        remote: true },
-
-      ],
-
-
-      interval: undefined };
+        remote: true
+      },
+    ],
+    interval: undefined,
+    index: 0, 
+    isPausedNow: false
+  };
 
   },
   watch: {
-    async messages(newMessages, oldMessages) {
+    async messages(_newMessages, _oldMessages) {
       if (this.queue.length === 0) {
         clearInterval(this.interval);
       }
-      await Vue.nextTick();
-      const messages = this.$refs.chatMessages;
-      const lastMessage = messages[messages.length - 1];
-      // TODO: Draw the message trail.
+
+      var oldIndex = this.index
+      await this.interval;
+      this.index.change = oldIndex + 1
+
 
       if (document.body !== null) {
         TweenMax.to(window, 1, { scrollTo: { y: document.body.scrollHeight }, ease: Power3.easeOut });
@@ -659,9 +861,24 @@ const ChatThread = new Vue({
     } },
 
   mounted() {
-    this.interval = setInterval(() => {
-      this.messages.push(this.queue.shift());
+//    this.interval = setInterval(() => {
+//      this.messages.push(this.queue.shift());
+//    }, 2000);
+    var isPaused = false;
+    var lastMessage = this.messages[this.messages.length - 1];
+    var msgIndex = this.index;
+    var nextMessage = this.queue[msgIndex];
+    var nextMsgLength = (nextMessage.text.length);
+    var rate = 200;
+    var pause = 100;
+    this.interval =
+      setInterval(() => {
+        this.messages.push(this.queue.shift());
     }, 2000);
-  } });
+
+  } 
+}
+);
 
 document.scrollingElement.scroll(0, 1);
+

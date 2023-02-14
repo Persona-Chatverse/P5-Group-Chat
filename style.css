@@ -22,20 +22,3 @@ html {
   font-family: "Optima Nova","Source Sans Pro", sans-serif;
   font-weight: 700;
 }
-
-body {
-  max-width: 600px;
-  margin: auto;
-  height: 100.001vh;
-  text-align: center;
-}
-
-a:link {
-  color:rgb(46, 46, 46);
-  text-decoration: none;
-}
-
-.flipX {
-  transform: scaleX(-1);
-  transform-origin: center;
-}

@@ -24,6 +24,7 @@
 			:message="message.text"
 			:remote="message.remote"
       		:chatter="message.chatter"
+			:newChatter="message.newChatter"
       		:consecutive="message.consecutive"
       />
 	</div>
@@ -48,7 +49,7 @@
 			:style="{ fontSize: fontSize + 'px' }">{{ hackText }}</text>
 
 		<!-- Buddy Avatar -->
-    <a v-if="newChatter">
+    <template v-if="newChatter">
   		<polygon
   			v-if="remote"
   			points="-10,-5 62,5 70,55 5,63"
@@ -65,7 +66,7 @@
       	<polygon points="2,-10 62,-10 100,42 10,58"/>
     	</clipPath>
 
-      <!-- absolute dogshit workaround -->
+      	<!-- absolute dogshit workaround -->
   		<image
   			clip-path="url(#avatarClipPath)"
   			v-if="chatter == 'Akechi'"
@@ -156,7 +157,16 @@
   			:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
   			width="80px"
       	/>
-    </a>
+  		<image
+  			clip-path="url(#avatarClipPath)"
+  			v-else-if="chatter == 'Lavensa'"
+  			x="-10"
+  			y="-10"
+  			xlink:href="..\images\Lavensa.png"
+  			:transform="`translate(30,${containerHeight / 2 + messageBox.origin.y - 25})`"
+  			width="80px"
+      	/>
+    </template>
 
 		<!-- Message Text Container Border -->
 		<polygon
@@ -195,10 +205,11 @@
 	</svg>
 </script>
 <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
 <script src='https://unpkg.com/vue-async-computed@3.7.0'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js'></script>
-<script src='//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js'></script><script  src="./script.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js'></script>
+<script src="script.js"></script>
 </div>
 </body>
 </html>
