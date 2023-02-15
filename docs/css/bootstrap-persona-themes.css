@@ -1,0 +1,109 @@
+
+/* PERSONA FONTS */
+@font-face {
+    font-family: 'Optima-Nova';
+    src: url('fonts/eot/OptimaNovaLT-Black.eot');
+    src: url('fonts/eot/OptimaNovaLT-Black.eot') format('embedded-opentype'),
+        url('fonts/woff2/OptimaNovaLT-Black.woff2') format('woff2'),
+        url('fonts/woff/OptimaNovaLT-Black.woff') format('woff'),
+        url('fonts/ttf/OptimaNovaLT-Black.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SkipStd-B';
+    src: url('fonts/otf/SkipStd-B-Shorten.otf') format('opentype');
+    src: url('fonts/svg/SkipStd-B-Shorten.svg#SkipStd-B-Shorten') format('svg'),
+        url('fonts/ttf/SkipStd-B-Shorten.ttf') format('truetype'),
+        url('fonts/woff/SkipStd-B-Shorten.woff') format('woff'),
+        url('fonts/woff2/SkipStd-B-Shorten.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+[data-bs-theme=p5] {
+    /* Colour Scheme */
+    --bs-font-sans-serif: 'Optima-Nova', "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    --bs-font-p5: 'Optima-Nova';
+    --bs-font-p4: 'SkipStd-B';
+    --bs-body-font-family: var(--bs-font-monospace);
+    --bs-body-font-size: 1rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.5;
+    --bs-body-color-p5: #130202;
+    --bs-body-color-rgb-p5: 19, 2, 2;
+    --bs-body-light-bg-p5: #d3d3d3;
+    --bs-body-light-bg-rgb-p5: 173, 0, 0;
+    --bs-body-bg-p5: #cc0000;
+    --bs-body-bg-rgb-p5: 204, 0, 0;
+    --bs-emphasis-color-p5: #ffffff;
+    --bs-emphasis-color-rgb-p5: 248, 249, 250;
+    --bs-secondary-color-p5: rgba(31, 31, 31, 0.75);
+    --bs-secondary-color-rgb-p5: 31, 31, 31;
+    --bs-secondary-bg-rgb-p5: 17, 17, 17;
+    --bs-tertiary-color-p5: rgba(173, 181, 189, 0.5);
+    --bs-tertiary-color-rgb-p5: 173, 181, 189;
+    --bs-tertiary-bg-p5: #2b3035;
+    --bs-tertiary-bg-rgb-p5: 43, 48, 53;
+    --bs-primary-p5: #0d6efd;
+    --bs-secondary-p5: #222222;
+    --bs-secondary-p5-rgb:34, 34, 34;
+    --bs-success-p5: #198754;
+    --bs-info-p5: #0dcaf0;
+    --bs-warning-p5: #ffc107;
+    --bs-danger-p5: #dc3545;
+    --bs-light-p5: #f8f9fa;
+    --bs-dark-p5: #212529;
+    --bs-primary-text-p5: #6ea8fe;
+    --bs-secondary-text-p5: #dfdfdf;
+    --bs-success-text-p5: #75b798;
+    --bs-info-text-p5: #6edff6;
+    --bs-warning-text-p5: #ffda6a;
+    --bs-danger-text-p5: #ea868f;
+    --bs-light-text-p5: #ffffff;
+    --bs-dark-text-p5: #ffffff;
+    --bs-primary-p5: #899bb6;
+    --bs-secondary-p5: #6c757d;
+    --bs-success-p5: #198754;
+    --bs-info-p5: #0dcaf0;
+    --bs-warning-p5: #ffc107;
+    --bs-danger-p5: #dc3545;
+    --bs-light-p5: #46484b;
+    --bs-dark-p5: #212529;
+    --bs-primary-bg-subtle-p5: #031633;
+    --bs-secondary-bg-subtle-p5: #212529;
+    --bs-success-bg-subtle-p5: #051b11;
+    --bs-info-bg-subtle-p5: #032830;
+    --bs-warning-bg-subtle-p5: #332701;
+    --bs-danger-bg-subtle-p5: #2c0b0e;
+    --bs-light-bg-subtle-p5: #343a40;
+    --bs-dark-bg-subtle-p5: #1a1d20;
+    --bs-primary-border-subtle-p5: #084298;
+    --bs-secondary-border-subtle-p5: #495057;
+    --bs-success-border-subtle-p5: #0f5132;
+    --bs-info-border-subtle-p5: #055160;
+    --bs-warning-border-subtle-p5: #664d03;
+    --bs-danger-border-subtle-p5: #842029;
+    --bs-light-border-subtle-p5: #495057;
+    --bs-dark-border-subtle-p5: #343a40;
+    --bs-heading-color-p5: #c9c9c9;
+    --bs-link-color-p5: #ffffff;
+    --bs-link-hover-color-p5: #9ec5fe;
+    --bs-link-color-rgb-p5: 110, 168, 254;
+    --bs-link-hover-color-rgb-p5: 158, 197, 254;
+    --bs-code-color-p5: #e685b5;
+    --bs-border-color-p5: #495057;
+    --bs-border-color-translucent-p5: rgba(255, 255, 255, 0.15);
+    /* End Colour Scheme */
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
